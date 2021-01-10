@@ -21,6 +21,6 @@ Follow these steps to run the project
 
 ## API Documentaion
 
-S.N | API Endpoint | Method | Input | Output
+s.n | API Endpoint | Method | Request | Response
 --- | --- | --- | --- |---
-Seconds | 301 | 283 | 290 | 286
+1 | create_user | POST | Name, Username, Password |
