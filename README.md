@@ -30,7 +30,7 @@ S.N. | API Endpoint | Method | In
 5 | `add_movie` | `POST` | `movie_name`, `movie_director` 
 6 | `get_movies` | `GET` | `movie_id` 
 7 | `save_score` | `POST` | `user_id`, `score`
-8 | `get_all_score` | `GER` | 
+8 | `get_all_score` | `GET` | 
 9 | `get_score` | `GET` | `user_id` | 
 
 
