@@ -28,9 +28,8 @@ S.N. | API Endpoint | Method | Request | Response
 3 | `verify_user` | `POST` | `user_id` | 
 4 | `login` | `POST` | `username`, `password` | 
 5 | `save_score` | `POST` | `user_id`, `score` |
-5 | `get_score` | `GET` | `user_id` | User's quiz score
-5 | `get_all_score` | `GER` | | Get all User's score in descending order
-5 | `get_movies` | `GET` |  | Get all movies and directors
-5 | `save_score` | `POST` | `user_id`, `score` |
-5 | `save_score` | `POST` | `user_id`, `score` |
-5 | `save_score` | `POST` | `user_id`, `score` |
+6 | `get_score` | `GET` | `user_id` | User's quiz score
+7 | `get_all_score` | `GER` | | Get all User's score in descending order
+8 | `get_movies` | `GET` | `movie_id` | Get all movies and directors
+9 | `add_movie` | `POST` | `movie_name`, `movie_director` |
+
