@@ -23,4 +23,12 @@ Follow these steps to run the project
 
 s.n | API Endpoint | Method | Request | Response
 --- | --- | --- | --- |---
-1 | create_user | POST | Name, Username, Password |
+1 | `create_user` | 'POST' | Name, Username, Password | Flags
+--- | --- | --- | --- |---
+1 | `create_user` | 'POST' | Name, Username, Password | Flags
+--- | --- | --- | --- |---
+1 | `create_user` | 'POST' | Name, Username, Password | Flags
+--- | --- | --- | --- |---
+1 | `create_user` | 'POST' | Name, Username, Password | Flags
+--- | --- | --- | --- |---
+1 | `create_user` | 'POST' | Name, Username, Password | Flags
