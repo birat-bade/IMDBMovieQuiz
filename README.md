@@ -12,4 +12,8 @@ Follow these steps to run the project
 6. React 
   7. Run `npm i` to install dependencies
   8. Execute `npm start` to start the project
-  
+
+* Item 1
+* Item 2
+  * Sub Item 1
+  * Sub Item 2
