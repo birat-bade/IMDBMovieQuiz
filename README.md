@@ -24,7 +24,13 @@ Follow these steps to run the project
 S.N. | API Endpoint | Method | Request | Response
 --- | --- | --- | --- |---
 1 | `create_user` | `POST` | `fullname`, `username`, `password` | 
-2 | `get_all_users` | `GET` |  | JSON data containaing users `id`,`fullname` and `date`
+2 | `get_all_users` | `GET` |  | All Users `id`,`fullname` and `date`
 3 | `verify_user` | `POST` | `user_id` | 
 4 | `login` | `POST` | `username`, `password` | 
-5 | `save_score` | `POST` | `user_id`, `score` | 
+5 | `save_score` | `POST` | `user_id`, `score` |
+5 | `get_score` | `GET` | `user_id` | User's quiz score
+5 | `get_all_score` | `GER` | | Get all User's score in descending order
+5 | `get_movies` | `GET` |  | Get all movies and directors
+5 | `save_score` | `POST` | `user_id`, `score` |
+5 | `save_score` | `POST` | `user_id`, `score` |
+5 | `save_score` | `POST` | `user_id`, `score` |
