@@ -18,3 +18,5 @@ Follow these steps to run the project
 * React Dependencies
   * Install required packages `npm i`
   * Start the project `npm start`
+  
+  ## API Endpoints
