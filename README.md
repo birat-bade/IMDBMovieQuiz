@@ -6,10 +6,9 @@ Follow below steps to run project
 
 1. Python
 2. Run `pip install -r requirements.csv`
-3. Intialize and Seed the SQLite dB Run `python imdb_movie_quiz_api.py seed`
+3. Seed the SQLite dB `python imdb_movie_quiz_api.py seed`
 4. Serve the API `python imdb_movie_quiz_api.py runserver`
 5. Add movie data into the SQLite dB `python imdb_scrapping.py`
-2. Run `npm i` command to install dependencies
-3. Execute `npm start` command to run the project
-
-  
+6. React 
+7. Run `npm i` to install dependencies
+8. Execute `npm start` to start the project
