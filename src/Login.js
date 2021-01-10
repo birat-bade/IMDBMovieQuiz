@@ -12,8 +12,8 @@ function Login(props) {
 
   const username_signup = useFormInput('');
   const password_signup = useFormInput('');
-
   const fullname = useFormInput('');
+
   const [login_error, setError_login] = useState(null);
   const [signup_error, setError_signup] = useState(null);
 
@@ -34,8 +34,15 @@ function Login(props) {
 
     }).catch(error => {
       setLoading(false);
-      if (error.response.status === 401) setError_login(error.response.data.message);
-      else setError_login("Something went wrong. Please try again later.");
+      if (error.response === undefined) {
+        setError_login("Something went wrong. Please try again later.");
+      }
+      else if (error.response.status === 401) {
+        setError_login(error.response.data.message);
+      }
+      else {
+        setError_login("Something went wrong. Please try again later.");
+      }
     });
   }
 
@@ -47,17 +54,21 @@ function Login(props) {
 
     }).catch(error => {
       setLoading(false);
-      if (error.response.status === 401) setError_signup(error.response.data.message);
-      else setError_signup("Something went wrong. Please try again later.");
+      if (error.response === undefined) {
+        setError_signup("Something went wrong. Please try again later.");
+      }
+      else if (error.response.status === 401) {
+        setError_signup(error.response.data.message);
+      }
+      else {
+        setError_signup("Something went wrong. Please try again later.");
+      }
     });
   }
 
   return (
 
-
     <div>
-
-
       <section className="overviewSection">
         <div style={{ marginTop: 10 }} >
           <div className="answers">
@@ -77,21 +88,15 @@ function Login(props) {
         <div style={{ marginTop: 10 }}>
           <input style={{ marginLeft: 10, width: 300, height: 40 }} type="text" {...fullname} placeholder="Fullname" autoComplete="new-password" required />
         </div>
-
         <div style={{ marginTop: 10 }}>
           <input type="text" {...username_signup} style={{ marginLeft: 10, width: 300, height: 40 }} placeholder="Username" autoComplete="new-password" required />
         </div>
         <div style={{ marginTop: 10 }}>
           <input type="password" {...password_signup} style={{ marginLeft: 10, width: 300, height: 40 }} placeholder="Password" autoComplete="new-password" required />
         </div>
-
         {signup_error && <><small style={{ color: 'red' }}>{signup_error}</small><br /></>}
         <button value={loading ? 'Loading...' : 'Sign Up'} onClick={handleSignUp} disabled={loading} >Sign Up</button>
       </section>
-
-
-
-
     </div>
   );
 }

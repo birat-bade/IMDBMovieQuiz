@@ -14,6 +14,7 @@ from flask_script import Manager, Server
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_quiz'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
@@ -56,7 +57,7 @@ class Score(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)
     user_id = db.Column('user_id', db.Integer(), db.ForeignKey('users.id'))
     score = db.Column('score', db.Integer, nullable=False)
-    created_on = db.Column(db.DateTime, server_default=db.func.now())
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
 
 @app.route('/')
@@ -97,17 +98,22 @@ def get_all_users():
 
     for user in users:
         if user.id != 1:
-            json_data.append({'id': user.id, 'name': user.full_name, 'is_approved': str(user.is_approved)})
+            json_data.append(
+                {'id': user.id, 'name': user.full_name, 'date': str(user.created_at),
+                 'is_approved': str(user.is_approved)})
 
     return jsonify(json_data)
 
 
-@app.route('/approve_user/<user_id>', methods=['POST'])
-def approve_user(user_id):
+@app.route('/verify_user/<user_id>', methods=['POST'])
+def verify_user(user_id):
     user = User.query.filter_by(id=user_id).first()
 
     if user is None:
-        return {'message': 'No User'}
+        return {'message': 'No User Found'}
+
+    if user.is_approved == 1:
+        return {'message': 'User Already Approved'}
 
     user.is_approved = 1
     db.session.commit()
@@ -134,7 +140,6 @@ def login():
 
         if user.id == 1:
             return {'token': user.id, 'user': user.user_name, 'admin': True}, 200
-
         return {'token': user.id, 'user': user.user_name, 'admin': False}, 200
 
     else:
@@ -162,7 +167,8 @@ def save_score():
     json_data = list()
 
     for score in scores:
-        json_data.append({'name': score.user.full_name, 'score': score.score,'date':str(score.created_on).split(' ')[0]})
+        json_data.append(
+            {'name': score.user.full_name, 'score': score.score, 'date': str(score.created_at)})
 
     return jsonify(json_data)
 
@@ -177,10 +183,10 @@ def get_score(user_id):
     return {'Score': score.score}
 
 
-@app.route('/get_top_score', methods=['GET'])
-def get_top_score():
+@app.route('/get_all_score', methods=['GET'])
+def get_all_score():
     scores = Score.query.order_by(desc(Score.score)).all()
-    json_data = [{'full_name': score.user.full_name, 'score': score.score, 'date': str(score.created_on).split(' ')[0]}
+    json_data = [{'full_name': score.user.full_name, 'score': score.score, 'date': str(score.created_at)}
                  for score in scores]
 
     return jsonify(json_data)
@@ -194,8 +200,9 @@ def get_movies():
 
     option_list = [movie.movie_director for movie in movies]
 
-    i = 1
+    option_list = list(set(option_list))
 
+    i = 1
     for movie in movies:
         option_list.remove(movie.movie_director)
         random.shuffle(option_list)
@@ -210,7 +217,6 @@ def get_movies():
              'correct': option.index(movie.movie_director) + 1, 'explanation': ''})
 
         i += 1
-
         option_list.append(movie.movie_director)
 
     return jsonify(json_data[:10])
@@ -258,6 +264,7 @@ def seed():
         user = User(full_name='admin', user_name='admin', password='password', is_approved=True)
         db.session.add(user)
         db.session.commit()
+        print('Database seeding complete')
     except IntegrityError:
         print('Database already seeded')
 

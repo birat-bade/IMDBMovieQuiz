@@ -53,7 +53,6 @@ class Dashboard extends React.Component {
                 {this.state.activeView === 'quizResults' &&
                     <QuizResults
                         results={this.getResults()}
-                        thumbnail={this.state.quiz.thumbnail}
                     />
                 }
                 <br />
@@ -69,12 +68,9 @@ class Dashboard extends React.Component {
     getData() {
 
         var quiz = require('./quiz.json');
-
         axios.get('http://127.0.0.1:5000/get_movies').then(response => {
             quiz.questions = response.data;
         })
-
-
         return quiz;
     };
 
@@ -139,10 +135,6 @@ class Dashboard extends React.Component {
 
 class QuizDescription extends React.Component {
     render() {
-        let quiz = this.props.quiz;
-        let image = quiz.image;
-        let htmlDescription = function () { return { __html: quiz.introduction }; };
-
         return (
             <section className="overviewSection">
                 <button onClick={this.props.showQuizQuestion}>Start Quiz</button>
@@ -236,25 +228,20 @@ class QuizResults extends React.Component {
     }
 
     render() {
-
-
-
         return (
             <section className="resultsSection">
                 <h2>Results</h2>
-                <br/>
+                <br />
                 <div className="scoring">
                     You answered <b>{this.numCorrect}</b> questions correctly.
                 </div>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <MDBDataTableV5
                     striped
                     bordered
                     small
                     data={this.state}
-                    sorting={true}
-
                 />
             </section>
         );

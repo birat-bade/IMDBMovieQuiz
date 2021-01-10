@@ -35,28 +35,18 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
-    console.log("here")
-    axios.get('http://127.0.0.1:5000/get_top_score').then(response => {
+    
+    axios.get('http://127.0.0.1:5000/get_all_score').then(response => {
       this.setState({ rows: response.data })
       console.log(this.state)
-
-      
 
     }).catch(err => {
       console.log('error')
     })
 
-    console.log("here")
+    
     
   }
- 
-
-  componentDidMount(){
-    
-    console.log("here")
-
-  }
-
   
 
   render() {
@@ -68,7 +58,7 @@ class Home extends React.Component {
           <b>Who Directed it ??</b>
           <p> Are you a Movie Buff? Find out your movie cred by taking this quiz. You will be asked who directed the top rated IMDB movies. The quiz contains 10 questions.</p>
 
-          <p>May the odds be ever in your favour</p>
+          <p>May the odds be ever in your favour. . .</p>
 
 
 
@@ -82,8 +72,6 @@ class Home extends React.Component {
             bordered
             small
             data={this.state}
-            sorting={true}
-            
           />
         </div>
 
