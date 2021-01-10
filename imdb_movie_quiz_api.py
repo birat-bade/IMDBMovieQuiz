@@ -64,6 +64,15 @@ class Score(db.Model):
 def show_all():
     return 'Welcome'
 
+@app.route('/verify_token/<token>', methods=['GET'])
+def verify_token(token):
+
+    user = User.query.filter_by(id=token).first()
+    
+    if user is not None:
+        return jsonify({'token': token,'user':user.user_name})
+    return {'m':'m'}
+
 
 @app.route('/create_user', methods=['POST'])
 def create_user():

@@ -23,10 +23,16 @@ function App() {
       return;
     }
 
-    axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
+    var url = 'http://127.0.0.1:5000/verify_token/' + token;
+
+    axios.get(url).then(response => {
       setUserSession(response.data.token, response.data.user);
       setAuthLoading(false);
+
+      console.log('asdasdasdasd')
+
     }).catch(error => {
+      console.log('error')
       removeUserSession();
       setAuthLoading(false);
     });
