@@ -145,6 +145,12 @@ class QuizDescription extends React.Component {
 
 class Quizinator extends React.Component {
     render() {
+
+        if (this.props.quiz.questions[this.props.currentQuestionIndex] === undefined) {
+
+            return (<div><small style={{ color: 'red' }}>Something went wrong. Please try again later.</small></div>)
+        }
+
         let quiz = this.props.quiz,
             question = this.props.quiz.questions[this.props.currentQuestionIndex],
             htmlQuestion = function () {
