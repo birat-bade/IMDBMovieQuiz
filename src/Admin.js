@@ -1,27 +1,95 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getUser, setUserSession,removeUserSession } from './Utils/Common';
+import { getUser, setUserSession, removeUserSession } from './Utils/Common';
 
-function Admin(props) {
-    
+import { MDBDataTableV5, MDBDataTable } from 'mdbreact';
 
 
-    const handleLogout = () => {
-        removeUserSession();
-        props.history.push('/login');
-      }
+class Admin extends React.Component {
 
+  constructor(props) {
+
+    super(props);
+    this.state = {
+      columns: [
+        {
+          label: 'Id',
+          field: 'id',
+          sort: 'desc',
+          width: 270
+        },
+        {
+          label: 'Name',
+          field: 'name',
+          sort: 'desc',
+          width: 150
+        },
+        {
+          label: 'Approved',
+          field: 'is_approved',
+          sort: 'desc',
+          width: 200
+        },
+        {
+          label: 'Approve User',
+          field: 'approve_user',
+          sort: 'desc',
+          width: 200
+        }
+      ],
+      rows: []
+    }
+    this.handleLogout = () => {
+      removeUserSession();
+      props.history.push('/login');
+    }
+  }
+
+  componentWillMount() {
+    console.log("here")
     axios.get('http://127.0.0.1:5000/get_all_users').then(response => {
-    console.log(response);
+      this.setState({ rows: response.data })
+      console.log(this.state)
+
+
+
+    }).catch(err => {
+      console.log('error')
     })
 
-  return (
+    console.log("here")
 
-    <div>
+  }
 
-      Welcome {getUser()} ! <a href="#" onClick={handleLogout} value="Logout">Logout</a>
-    </div>);
+
+  render() {
+    return (
+      <div >
+        <section className="resultsSection">
+        <div >
+
+          Welcome {getUser()} ! <a href="#" onClick={this.handleLogout} value="Logout">Logout</a>
+        </div>
+        <br />
+        <br />
+        <div style={{ width: 800, textAlign: "center" }}>
+          <MDBDataTableV5
+            striped
+            bordered
+            small
+            data={this.state}
+            sorting={true}
+
+          />
+        </div>
+        </section>
+      </div>
+    )
+  }
+
+
 }
+
 
 
 export default Admin;

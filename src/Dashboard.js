@@ -1,32 +1,26 @@
 
-import { getToken,getUser, removeUserSession } from './Utils/Common';
+import { getToken, getUser, removeUserSession } from './Utils/Common';
 
 import React, { Component } from 'react';
 
 import './dashboard.css';
 
-
 import axios from 'axios';
 
-
+import { MDBDataTableV5, MDBDataTable } from 'mdbreact';
 
 
 class Dashboard extends React.Component {
 
-
-
-
     constructor(props) {
         super(props);
 
-        
-
-        
         this.state = {
             quiz: this.getData(),
             activeView: null,
             currentQuestionIndex: 0,
-            answers: []
+            answers: [],
+            data: []
         };
 
         this.submitAnswer = this.submitAnswer.bind(this);
@@ -35,8 +29,8 @@ class Dashboard extends React.Component {
     handleLogout = () => {
         removeUserSession();
         this.props.history.push('/login');
-      }
-    
+    }
+
 
     render() {
         return (
@@ -62,8 +56,8 @@ class Dashboard extends React.Component {
                         thumbnail={this.state.quiz.thumbnail}
                     />
                 }
-            <br/>
-             Welcome {getUser()} ! <a href="#" onClick={this.handleLogout} value="Logout" >Logout</a>
+                <br />
+                Welcome {getUser()} ! <a href="#" onClick={this.handleLogout} value="Logout" >Logout</a>
             </div>
         );
     };
@@ -78,7 +72,7 @@ class Dashboard extends React.Component {
 
         axios.get('http://127.0.0.1:5000/get_movies').then(response => {
             quiz.questions = response.data;
-            })
+        })
 
 
         return quiz;
@@ -166,7 +160,7 @@ class Quizinator extends React.Component {
             },
             answerButtons = question.answers.map((answer, i) =>
                 <p key={i}><button className={answer.answer} onClick={this.handleClick.bind(this, i)} disabled={this.props.buttonsDisabled}>{answer}</button></p>
-        );
+            );
 
         return (
             <section className={'quizSection' + (this.props.buttonsDisabled ? ' transitionOut' : '')}>
@@ -198,35 +192,70 @@ class Quizinator extends React.Component {
 }
 
 class QuizResults extends React.Component {
-    render() {
-        
-        let numCorrect = 0;
+
+    constructor(props) {
+        super(props);
+        this.numCorrect = 0;
 
         this.props.results.forEach((answer) => {
             if (!!answer.isCorrect) {
-                numCorrect += 1;
-                
+                this.numCorrect += 1;
+
             }
         });
 
+        this.state = {
+            columns: [
+                {
+                    label: 'Name',
+                    field: 'name',
+                    sort: 'desc',
+                    width: 150
+                },
+                {
+                    label: 'Score',
+                    field: 'score',
+                    sort: 'desc',
+                    width: 200
+                },
+                {
+                    label: 'Date',
+                    field: 'date',
+                    sort: 'desc',
+                    width: 200
+                }
+            ],
+            rows: []
 
+        };
 
-        var token = getToken();
-        
+        axios.post('http://127.0.0.1:5000/save_score', { user_id: getToken(), score: this.numCorrect }).then(response => {
 
-        axios.post('http://127.0.0.1:5000/save_score', { user_id: token, score: numCorrect}).then(response => {
-            console.log(response);
-
+            this.setState({ rows: response.data })
         })
+    }
+
+    render() {
+
 
 
         return (
             <section className="resultsSection">
                 <h2>Results</h2>
+                <br/>
                 <div className="scoring">
-                    You answered <b>{numCorrect}</b> questions correctly.
+                    You answered <b>{this.numCorrect}</b> questions correctly.
                 </div>
-                {/* <ol>{results}</ol> */}
+                <br/>
+                <br/>
+                <MDBDataTableV5
+                    striped
+                    bordered
+                    small
+                    data={this.state}
+                    sorting={true}
+
+                />
             </section>
         );
     }

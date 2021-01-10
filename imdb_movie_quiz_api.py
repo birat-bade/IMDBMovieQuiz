@@ -96,8 +96,8 @@ def get_all_users():
     json_data = list()
 
     for user in users:
-        if user.full_name != 'admin':
-            json_data.append({'id': user.id, 'name': user.full_name, 'is_approved': user.is_approved})
+        if user.id != 1:
+            json_data.append({'id': user.id, 'name': user.full_name, 'is_approved': str(user.is_approved)})
 
     return jsonify(json_data)
 
@@ -154,10 +154,15 @@ def save_score():
 
     scores = Score.query.order_by(desc(Score.score)).filter_by(user_id=user_id).all()
 
+    message = ''
+
+    if score.score > scores[0].score:
+        message = 'You\'ve beaten your previous top score.'
+
     json_data = list()
 
     for score in scores:
-        json_data.append({'name': score.user.full_name, 'score': score.score})
+        json_data.append({'name': score.user.full_name, 'score': score.score,'date':str(score.created_on).split(' ')[0]})
 
     return jsonify(json_data)
 
@@ -175,7 +180,8 @@ def get_score(user_id):
 @app.route('/get_top_score', methods=['GET'])
 def get_top_score():
     scores = Score.query.order_by(desc(Score.score)).all()
-    json_data = [{score.user.full_name: score.score} for score in scores]
+    json_data = [{'full_name': score.user.full_name, 'score': score.score, 'date': str(score.created_on).split(' ')[0]}
+                 for score in scores]
 
     return jsonify(json_data)
 
@@ -259,6 +265,6 @@ def seed():
 if __name__ == '__main__':
     db.create_all()
 
-    app.run(debug=True, host=host, port=port)
+    # app.run(debug=True, host=host, port=port)
 
-    # manager.run()
+    manager.run()

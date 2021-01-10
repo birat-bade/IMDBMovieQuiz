@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     const token = getToken();
-    
+
     if (!token) {
       return;
     }
@@ -38,11 +38,12 @@ function App() {
 
   return (
     <div className="App">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
       <BrowserRouter>
         <div>
           <div className="header">
             <NavLink exact activeClassName="active" to="/">Home</NavLink>
-            <NavLink activeClassName="active" to="/login">Take a Quiz</NavLink><small></small> 
+            <NavLink activeClassName="active" to="/login">IMDBQuiz</NavLink><small></small>
             {/* <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink><small></small> */}
           </div>
           <div className="content">

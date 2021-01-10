@@ -168,6 +168,7 @@ button {
 
 .resultsSection {
     text-align: center;
+    font-size: 15px;
 }
 
     .resultsSection h2 {
@@ -178,7 +179,7 @@ button {
     .resultsSection .scoring {
         text-align: left;
         margin-top: -8px;
-        font-size: 15px;
+        font-size: 18px;
     }
 
     .resultsSection .result {
