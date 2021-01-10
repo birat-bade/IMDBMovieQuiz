@@ -22,7 +22,7 @@ Follow these steps to run the project
 ## API Documentaion
 
 S.N. | API Endpoint | Method | In 
---- | --- | --- | --- |---
+--- | --- | --- | --- 
 1 | `create_user` | `POST` | `fullname`, `username`, `password` 
 2 | `get_all_users` | `GET` |  
 3 | `verify_user` | `POST` | `user_id` 
