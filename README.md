@@ -21,10 +21,10 @@ Follow these steps to run the project
 
 ## API Documentaion
 
-s.n | API Endpoint | Method | Request | Response
+S.N. | API Endpoint | Method | Request | Response
 --- | --- | --- | --- |---
-1 | `create_user` | 'POST' | Name, Username, Password | Flags
-1 | `create_user` | 'POST' | Name, Username, Password | Flags
-1 | `create_user` | 'POST' | Name, Username, Password | Flags
-1 | `create_user` | 'POST' | Name, Username, Password | Flags
-1 | `create_user` | 'POST' | Name, Username, Password | Flags
+1 | `create_user` | `POST` | `fullname`, `username`, `password` | 
+2 | `get_all_users` | `GET` |  | JSON data containaing users `id`,`fullname` and `date`
+3 | `verify_user` | `POST` | `user_id` | 
+4 | `login` | `POST` | `username`, `password` | 
+5 | `save_score` | `POST` | `user_id`, `score` | 
