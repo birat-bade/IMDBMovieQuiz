@@ -19,8 +19,8 @@ Follow these steps to run the project
   * Install required packages `npm i`
   * Start the project `npm start`
 
-## API Endpoints
+## API Documentaion
 
-S.N | API Endpoint | Methode | Input | Output |
---- | --- | --- | --- |--- |--- |
-Seconds | 301 | 283 | 290 | 286 | 289 |
+S.N | API Endpoint | Method | Input | Output
+--- | --- | --- | --- |---
+Seconds | 301 | 283 | 290 | 286
