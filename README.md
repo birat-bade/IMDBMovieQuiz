@@ -1,5 +1,5 @@
 # IMDBMovieQuiz
-A simple quiz quiz application made by scrapping movie information fom IMDB.
+A simple quiz application made by scrapping movie information fom IMDB.
 
 ## Stack
 * Database `SQLite`
