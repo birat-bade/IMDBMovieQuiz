@@ -1,5 +1,10 @@
 # IMDBMovieQuiz
-Are you a Movie Buff? Find out your movie cred by taking this quiz. You will be asked who directed the top rated IMDB movies. The quiz contains 10 questions.
+A simple quiz quiz application made by scrapping movie information fom IMDB.
+
+## Stack
+* Database `SQLite`
+* API `Flask`
+* Frontend `ReactJS`
 
 ## Setup
 Follow these steps to run the project
