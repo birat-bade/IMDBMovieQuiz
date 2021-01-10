@@ -5,7 +5,7 @@ import { getToken } from './Common';
 // handle the public routes
 function PublicRoute({ component: Component, ...rest }) {
 
-  var path = getToken() === 1 ? '/admin' : '/dashboard'
+  var path = getToken() == 1 ? '/admin' : '/dashboard'
 
 
   return (
