@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getUser, setUserSession, removeUserSession } from './Utils/Common';
+import { getUser, setUserSession, removeUserSession, getToken } from './Utils/Common';
 
 import { MDBDataTableV5, MDBDataTable } from 'mdbreact';
 import { verify } from 'crypto';
@@ -93,6 +93,10 @@ class Admin extends React.Component {
 
 
   render() {
+
+    if(getToken() !=1){
+      this.props.history.push('/dashboard');
+    }
 
     var columns = this.state.columns;
     var rows = this.state.rows;
