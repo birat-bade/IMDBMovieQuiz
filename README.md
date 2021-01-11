@@ -33,4 +33,12 @@ S.N. | API Endpoint | Method | In
 8 | `get_all_score` | `GET` | 
 9 | `get_score` | `GET` | `user_id` | 
 
+## UserGuide
 
+* To use the app you must sign up first.
+* Once you've signed up, a admin must verify your account before you can log into the system. 
+* To verify the user log in using the admins credentials(`username: admin, password: password`).
+* Admin Credentials are seeded into the database during app initialization.
+* If the `Approved` flag is `False` the user cannot access the system.
+* Use the admin pannel to verify the desired user by entering their `User Id` into the text field and clicking on `Verify User`.
+* The `Approved` flag will be set to `True`. (Referesh the page to see the changes)
